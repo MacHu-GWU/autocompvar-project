@@ -369,4 +369,4 @@ if __name__ == "__main__":
         print(gen_code_def_part(metadata))
         print(gen_code_inst_part(metadata))
         
-    test_gen_code()
+#     test_gen_code()
