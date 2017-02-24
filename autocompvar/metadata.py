@@ -8,8 +8,8 @@ try:
         to_variable_name
     )
     from .exc import ValidationError
-    from .packages.six import integer_types, string_types
-    from .packages.nameddict import Base as GenericData
+    from .pkg.six import integer_types, string_types
+    from .pkg.nameddict import Base as GenericData
 except:
     from autocompvar import templates
     from autocompvar.name_convention import (
@@ -17,8 +17,8 @@ except:
         to_variable_name,
     )
     from autocompvar.exc import ValidationError
-    from autocompvar.packages.six import integer_types, string_types
-    from autocompvar.packages.nameddict import Base as GenericData
+    from autocompvar.pkg.six import integer_types, string_types
+    from autocompvar.pkg.nameddict import Base as GenericData
 
 from collections import OrderedDict
 

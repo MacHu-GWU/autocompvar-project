@@ -11,9 +11,9 @@ Similar to ``collections.namedtuple``, ``nameddict`` is a data container class.
 """
 
 try:
-    from .packages import nameddict
+    from .pkg import nameddict
 except:
-    from autocompvar.packages import nameddict
+    from autocompvar.pkg import nameddict
 
 SEP = "____"
 
