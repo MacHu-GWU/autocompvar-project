@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dataIO import textfile
-from autocompvar.metadata import gen_code
-from autocompvar.name_convention import to_variable_name
+from autocompvar import create_data_script
 
-data = {
+metadata = {
     "classname": "Food",
     "attrs": [],
     "collection": [
@@ -51,10 +49,8 @@ data = {
         },
     ],
 }
-    
-code = gen_code(data)
-path = to_variable_name(data["classname"]) + ".py"
-textfile.write(code, path)
+
+create_data_script(metadata)
 
 # Copy following code to food_data.py
 """

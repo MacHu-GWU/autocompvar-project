@@ -4,52 +4,52 @@
 from __future__ import print_function
 from autocompvar.metadata import gen_code
 
-data = {
-    "classname": "ItemType",
-    "attrs": [],
-    "collection": [
+metadata = {
+    "classname": "Food", # it's the class name
+    "attrs": [], # it's the attributes list in order, if no attributes, use empty list
+    "collection": [ # list of sub class
         {
-            "classname": "SubClass",
+            "classname": "FoodCategory",
             "attrs": ["id", "name"],
-            "keys": ["name"],
-            "data": {"id": 1, "name": "weapon"},
+            "keys": ["name"], # key is the attributes that indexable. typically the value is non-repeat integer or string
+            "data": {"id": 1, "name": "Fruit"}, # the data for the instance
             "collection": [
                 {
-                    "classname": "Weapon",
+                    "classname": "Fruit",
                     "attrs": ["id", "name"],
-                    "keys": ["name"],
-                    "data": {"id": 1, "name": "sword"},
+                    "keys": ["id", "name"],
+                    "data": {"id": 1, "name": "Apple"},
                 },
                 {
-                    "classname": "Weapon",
+                    "classname": "Fruit",
                     "attrs": ["id", "name"],
-                    "keys": ["name"],
-                    "data": {"id": 2, "name": "dagger"},
+                    "keys": ["id", "name"],
+                    "data": {"id": 2, "name": "Banana"},
                 },
             ],
         },
         {
-            "classname": "SubClass",
+            "classname": "FoodCategory",
             "attrs": ["id", "name"],
             "keys": ["name"],
-            "data": {"id": 2, "name": "armor"},
+            "data": {"id": 2, "name": "Meat"},
             "collection": [
                 {
-                    "classname": "Armor",
+                    "classname": "Meat",
                     "attrs": ["id", "name"],
-                    "keys": ["name"],
-                    "data": {"id": 1, "name": "plate"},
+                    "keys": ["id", "name"],
+                    "data": {"id": 1, "name": "Pork"},
                 },
                 {
-                    "classname": "Armor",
+                    "classname": "Meat",
                     "attrs": ["id", "name"],
-                    "keys": ["name"],
-                    "data": {"id": 2, "name": "armor"},
+                    "keys": ["id", "name"],
+                    "data": {"id": 2, "name": "Beef"},
                 },
             ],
         },
     ],
 }
 
-code = gen_code(data)
+code = gen_code(metadata)
 print(code)
