@@ -10,3 +10,4 @@ class {{ class_def.classname }}(Base):
         self.{{ attr }} = {{ attr }}
         {% endfor -%}
         {% endif -%}
+        self._collection = list()

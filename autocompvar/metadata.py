@@ -150,7 +150,9 @@ class ClassDef(object):
 
 
 class ClassInstance(object):
-
+    """A data container for instance of a class.     
+    """
+    
     def __init__(self, classname, attrs, keys=None, data=None, collection=None):
         self.classname = classname
         self.attrs = attrs
@@ -217,6 +219,8 @@ class ClassInstance(object):
 
     @classmethod
     def load(cls, metadata):
+        """load class data from dict.
+        """
         return cls(
             classname=metadata.get("classname"),
             attrs=metadata.get("attrs"),
@@ -226,6 +230,8 @@ class ClassInstance(object):
         )
 
     def dump(self):
+        """dump class data to dict.
+        """
         metadata = {
             "classname": self.classname,
             "attrs": self.attrs,
@@ -241,6 +247,8 @@ class ClassInstance(object):
 
 
 def gen_code_def_part(metadata):
+    """生成代码中定义类的部分。
+    """
     class_def_dict = validate(metadata)
     class_def_list = list(class_def_dict.values())
     code = templates.t_def_all_class.render(class_def_list=class_def_list)
@@ -248,12 +256,11 @@ def gen_code_def_part(metadata):
 
 
 def gen_code_inst_part(metadata, do_validate=True, code_snipet=None):
-    """广度优先向下遍历所有的容器类和实例类
+    """广度优先向下遍历所有的容器类和实例类, 生成数据的实例部分的代码。
 
-    1. 凡是遇到一个类, 都创建一次实例
-    2. 凡是遇到一个类, 只要有母类, 该类的实例都作为一个属性绑定到母类的实例下
-
-    最后就不 
+    1. 凡是遇到一个类, 都创建一次实例。
+    2. 凡是遇到一个类, 只要有母类, 该类的实例都作为一个属性绑定到母类的实例下。
+      并且将其放入 ``self._collection`` 的列表中。
     """
     if do_validate:
         class_def_dict = validate(metadata)
@@ -281,7 +288,9 @@ def gen_code_inst_part(metadata, do_validate=True, code_snipet=None):
                         str(c_i.data[key]).replace(" ", "_"), 
                         c_i.varname
                     ))
-
+                code_snipet.append("%s._collection.append(%s)" % (
+                    cls_inst.varname, c_i.varname))
+                
     return "\n".join(code_snipet)
 
 

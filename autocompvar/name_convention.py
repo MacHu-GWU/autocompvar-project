@@ -10,6 +10,13 @@ VAR_NAME_CHARSET = set(string.ascii_lowercase + string.digits + "_")
 VAR_FORBIDDEN_CHARSET = set(r"""~`!@#$%^&*()-+={}[]|\:;"'<,>.?/""" + string.ascii_uppercase)
 
 def is_valid_class_name(name):
+    """Check if it is a valid variable name.
+    
+    A valid variable name has to:
+    
+    - start wither upper case
+    - only alpha digits
+    """
     try:
         assert name[0].isupper()
         assert len(set(name).difference(KLS_NAME_CHARSET)) == 0
@@ -19,6 +26,13 @@ def is_valid_class_name(name):
 
 
 def is_valid_variable_name(name):
+    """Check if it is a valid variable name.
+    
+    A valid variable name has to:
+    
+    - start wither lower case
+    - reserved SEPTERATOR is not in it.
+    """
     try:
         assert name[0].islower()
         assert SEP not in name
@@ -29,6 +43,8 @@ def is_valid_variable_name(name):
 
 
 def is_valid_surfix(name):
+    """Surfix is the attribute name used for index.
+    """
     try:
         assert SEP not in name
         assert len(VAR_FORBIDDEN_CHARSET.intersection(name)) == 0
@@ -38,6 +54,9 @@ def is_valid_surfix(name):
     
     
 def to_variable_name(cls_name):
+    """Convert class name to variable name format. usually use "_" to connect
+    each word.
+    """
     assert is_valid_class_name(cls_name)
 
     words = list()
